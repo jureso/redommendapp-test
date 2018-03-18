@@ -15,7 +15,7 @@ myApp.controller('MyCtrl', function($scope, $http) {
 
 
     $scope.get_user_list = function () {
-        $http.get('http://127.0.0.1:5000/user_list').then(function(response) {
+        $http.get('/user_list').then(function(response) {
             $scope.user_list = response.data.user_list;
         });
 
