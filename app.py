@@ -1,8 +1,17 @@
+import os
 import flask
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 import json
 app = Flask(__name__,static_url_path='')
 
+import config
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+import models
 
 users = {}
 users[0] = {'user_id': 0, 'first_name': 'Jure', 'last_name': 'Sokolic'}
@@ -65,6 +74,11 @@ def recommend(user_id):
 @app.route('/')
 def index():
   return app.send_static_file('index.html')
+
+@app.route('/test_db')
+def test_db():
+  print(models.Place.query.get(5))
+  return flask.jsonify(str(models.Place.query.get(5)))
 
 if __name__ == '__main__':
   app.run()
