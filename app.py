@@ -25,6 +25,7 @@ def user_list():
 
 @app.route("/user/<int:user_id>/preferences_and_friends", methods=["GET"])
 def user_preferences_and_friends(user_id):
+  re.init()
   """For a given user_id return a list of user's friends and places ratings."""
   try:
     data = {}
@@ -38,6 +39,7 @@ def user_preferences_and_friends(user_id):
 
 @app.route("/user/<int:user_id>/recommendations", methods=["GET"])
 def user_recommendations(user_id):
+  re.init()
   """For a give user_id returns a list of places that the user should visit."""
   try:
     data = {}
@@ -50,7 +52,6 @@ def user_recommendations(user_id):
 
 @app.route('/')
 def index():
-  re.init()
   return app.send_static_file('index.html')
 
 if __name__ == '__main__':
