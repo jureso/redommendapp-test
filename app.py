@@ -50,7 +50,10 @@ def user_recommendations(user_id):
 
 @app.route('/')
 def index():
+  re.init()
   return app.send_static_file('index.html')
 
 if __name__ == '__main__':
   app.run()
+
+  #TODO: When an account is selected on the UI recommendations of places to go should be listed for that account with probabilities % that the match is appropriate

@@ -8,6 +8,10 @@ class REngine(object):
     self.user_list = None
     self.place_list = None
 
+  def init(self):
+    self.__set_user_list()
+    self.__set_place_list()
+
   def get_user_list(self):
     """Returns list of users in our database."""
     if self.user_list is None:
@@ -68,10 +72,6 @@ class REngine(object):
     if user_id not in self._user_id_list:
       return []
     else:
-      # This is here because if it is in __init__() we get errors on module import!
-      if self.place_list is None:
-        self.__set_place_list()
-
       # List of all friends of the user
       friends_list = self.get_friends_list(user_id)
       friends_id_list = [f['user_id'] for f in friends_list]
