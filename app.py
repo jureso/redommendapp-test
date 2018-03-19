@@ -7,11 +7,11 @@ import pandas as pd
 
 
 app = Flask(__name__,static_url_path='')
-import models
-
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+import models
 
 def get_user_list():
   users = models.User.query.all()
