@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 dropdb recommend_app_test
 
 psql << EOF
