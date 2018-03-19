@@ -30,14 +30,21 @@
                     <select ng-model="selected_user" ng-options="u.first_name for u in user_list" ng-change="update_data()"></select>
                 </label>
                 <br>
-                <label>{{selected_user.first_name}} has tried restaurants: </label>  <label ng-repeat="p in user_preferences">{{p.place_name}}</label>
-                <br>
-                <label>{{selected_user.first_name}}'s friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}</label>
+                <div ng-show="selected_user">
+                    <label>{{selected_user.first_name}} has tried restaurants: </label> <label ng-repeat="p in user_preferences" >{{p.place_name}}{{$last ? '.' : ($index==user_preferences.length-2) ? ' and&nbsp' : ',&nbsp'}}</label>
+                    <br>
+                    <label>{{selected_user.first_name}}'s friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}{{$last ? '.' : ($index==user_friends.length-2) ? ' and&nbsp' : ',&nbsp'}}</label>
 
-                <p>{{selected_user.first_name}} should try restaurants: </p>
-                <ol>
-                  <li ng-repeat="r in recommendations">{{ r.place_name }}</li>
-                </ol>
+                    <div ng-show="recommendations.length">
+                        <p>{{selected_user.first_name}} should try restaurants: </p>
+                        <ol>
+                        <li ng-repeat="r in recommendations">{{ r.place_name }}</li>
+                        </ol>
+                    </div>
+                    <div ng-show="!recommendations.length">
+                        <p>We do not have recommendations for {{selected_user.first_name}} at the moment!</p>
+                    </div>
+                </div>
             </div>
         </div>
       </div>

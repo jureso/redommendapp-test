@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp', []);
 myApp.controller('MyCtrl', function($scope, $http) {
     //$scope.user = "";
-    $scope.selected_user = "";
+    $scope.selected_user = null;
 
     $scope.user_preferences = [];
     $scope.user_friends = [];
