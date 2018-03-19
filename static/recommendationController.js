@@ -5,13 +5,15 @@ myApp.controller('MyCtrl', function($scope, $http) {
 
     $scope.user_preferences = [];
     $scope.user_friends = [];
+    $scope.recommendations = [];
 
     $scope.update_data = function () {
         //$scope.user_preferences = [{name: 'Starbucks'}];
         //$scope.user_friends = [{user_id: 2, first_name:'Zarja', last_name:'Cibej'}];
-        $scope.get_user_friends();
-        $scope.get_user_preferences();
+        //$scope.get_user_friends();
+        //$scope.get_user_preferences();
         $scope.get_user_friends_and_preferences();
+        $scope.get_user_recommendations();
         };
 
 
@@ -23,8 +25,9 @@ myApp.controller('MyCtrl', function($scope, $http) {
     };
 
     $scope.get_user_friends_and_preferences = function () {
-        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/friends_and_preferences').then(function(response) {
-            $scope.user_friends_and_preferences = response.data.friends;
+        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/preferences_and_friends').then(function(response) {
+            $scope.user_friends = response.data.friends_list;
+            $scope.user_preferences = response.data.ratings_list;
         });
     };
 
@@ -40,7 +43,12 @@ myApp.controller('MyCtrl', function($scope, $http) {
         });
     };
 
-    $scope.get_user_recommendations = function () {};
+    $scope.get_user_recommendations = function () {
+        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/recommendations2').then(function(response) {
+            $scope.recommendations = response.data.recommendations;
+        });
+
+    };
 
     //$scope.user_list=[{user_id: 0, first_name:'Jure', last_name:'Sokolic'},
     //             {user_id: 1, first_name:'Neja', last_name:'Markocic'},

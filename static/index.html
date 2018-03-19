@@ -26,17 +26,12 @@
                     <select ng-model="selected_user" ng-options="u.first_name for u in user_list" ng-change="update_data()"></select>
             </label>
                 <br>
-                <label>User has tried restaurants: </label>  <label ng-repeat="p in user_friends_and_preferences.ratings_list">{{p.place_name}}</label>
+                <label>User has tried restaurants: </label>  <label ng-repeat="p in user_preferences">{{p.place_name}}</label>
                 <br>
-                <label>User's friends are: </label>  <label ng-repeat="p in user_preferences">{{p.name}}</label>
-
-                    <p>fdsgfjgkfjgkfgjfkgjfk </p>
-    <p>User likes to eat in: </p>
-
-    <p ng-repeat="p in user_preferences">{{p.name}} </p>
+                <label>User's friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}</label>
 
     <p>{{selected_user.first_name}} should try restaurants: </p>
-    <p>... </p>
+    <p ng-repeat="r in recommendations">{{ r.place_name }} </p>
     </div>
 <!--
 <script>
