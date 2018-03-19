@@ -31,10 +31,18 @@
                 </label>
                 <br>
                 <div ng-show="selected_user">
+                    <div ng-show="user_preferences.length">
                     <label>{{selected_user.first_name}} has tried restaurants: </label> <label ng-repeat="p in user_preferences" >{{p.place_name}}{{$last ? '.' : ($index==user_preferences.length-2) ? ' and&nbsp' : ',&nbsp'}}</label>
-                    <br>
-                    <label>{{selected_user.first_name}}'s friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}{{$last ? '.' : ($index==user_friends.length-2) ? ' and&nbsp' : ',&nbsp'}}</label>
-
+                    </div>
+                    <div ng-show="!user_preferences.length">
+                        <label>{{selected_user.first_name}} has not tried any restaurants in London.</label>
+                    </div>
+                    <div ng-show="user_friends.length">
+                        <label>{{selected_user.first_name}}'s friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}{{$last ? '.' : ($index==user_friends.length-2) ? ' and&nbsp' : ',&nbsp'}}</label>
+                    </div>
+                    <div ng-show="!user_friends.length">
+                        <label>{{selected_user.first_name}} does not have friends among our users.</label>
+                    </div>
                     <div ng-show="recommendations.length">
                         <p>{{selected_user.first_name}} should try restaurants: </p>
                         <ol>
@@ -55,8 +63,6 @@
 </html>
 
 <!-- TODO:
-    - diplay strings correctly
-    - display data only once user is selected
     - we need to handle http request errors!
 -->
 
