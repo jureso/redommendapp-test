@@ -73,7 +73,7 @@ def get_user_recommendations(user_id, rating_lower_threshold = 3, n_recommendati
 
     recommendations_list = []
     for p_id, r in pivot_table_mean.items():
-      print(p_id, r)
+      #print(p_id, r)
       if r >= rating_lower_threshold:
         recommendations_list.append({'place_id': p_id, 'prediction': int(r),
                                      'place_name': place_id2name[p_id]})
@@ -121,6 +121,8 @@ def index():
 if __name__ == '__main__':
   app.run()
 
+  # TODO: gui
+  # TODO: refactor database queries and recommendations and api
   # TODO: error handling and exceptions for recommendation algorithm
   # TODO: error handling and exceptions for api
   # TODO: api tests
