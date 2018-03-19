@@ -28,7 +28,7 @@ class Friend(db.Model):
   __tablename__ = 'friends'
 
   user_id = db.Column(Integer, primary_key=True)
-  friend_user_id = db.Column(Integer)
+  friend_user_id = db.Column(Integer, primary_key=True)
   def __repr__(self):
     return '<user_id: %d, friend_user_id: %d>' % (
     self.user_id, self.friend_user_id)
@@ -37,7 +37,7 @@ class Rating(db.Model):
   __tablename__ = 'ratings'
 
   user_id = db.Column(Integer, primary_key=True)
-  place_id = db.Column(Integer)
+  place_id = db.Column(Integer, primary_key=True)
   rating = db.Column(Integer)
 
   def __repr__(self):
