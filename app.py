@@ -93,7 +93,7 @@ def user_list():
   data = {}
   data['user_list'] = get_user_list()
   response = flask.jsonify(data)
-  response.headers.add('Access-Control-Allow-Origin', '*')
+  #response.headers.add('Access-Control-Allow-Origin', '*')
   return response
 
 @app.route("/user/<int:user_id>/preferences_and_friends", methods=["GET"])
@@ -103,7 +103,7 @@ def user_preferences_and_friends(user_id):
   data['friends_list'] = get_friends_list(user_id)
   data['ratings_list'] = get_ratings_list(user_id)
   response = flask.jsonify(data)
-  response.headers.add('Access-Control-Allow-Origin', '*')
+  #response.headers.add('Access-Control-Allow-Origin', '*')
   return response
 
 @app.route("/user/<int:user_id>/recommendations", methods=["GET"])
@@ -111,7 +111,7 @@ def user_recommendations(user_id):
   data = {}
   data['recommendations'] = get_user_recommendations(user_id)
   response = flask.jsonify(data)
-  response.headers.add('Access-Control-Allow-Origin', '*')
+  #response.headers.add('Access-Control-Allow-Origin', '*')
   return response
 
 @app.route('/')
