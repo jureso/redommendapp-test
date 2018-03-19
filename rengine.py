@@ -8,10 +8,12 @@ class REngine(object):
     self.user_list = None
     self.place_list = None
     self._user_id_list = []
+    self._place_id2name = []
 
   def init(self):
     self.__set_user_list()
     self.__set_place_list()
+
 
   def get_user_list(self):
     """Returns list of users in our database."""
