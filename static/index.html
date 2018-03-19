@@ -5,11 +5,16 @@
     <title>Recommendation Engine</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="recommendationController.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style>
       .container {
         max-width: 1000px;
+      }
+      label {
+        font-weight: normal !important;
+      }
+      ol {
+        border: 1px solid black;
       }
     </style>
 </head>
@@ -17,45 +22,24 @@
 <body>
     <div class="container">
       <div class="row">
-        <div class="col-sm-5 col-sm-offset-1">
+        <div class="col-sm-7 col-sm-offset-2">
           <h1>Where to eat?</h1>
           <br>
-    <!-- TODO: value must be user id and text must be a name!!!-->
             <div ng-app="myApp" ng-controller="MyCtrl">
                 <label>User:
                     <select ng-model="selected_user" ng-options="u.first_name for u in user_list" ng-change="update_data()"></select>
-            </label>
+                </label>
                 <br>
-                <label>User has tried restaurants: </label>  <label ng-repeat="p in user_preferences">{{p.place_name}}</label>
+                <label>{{selected_user.first_name}} has tried restaurants: </label>  <label ng-repeat="p in user_preferences">{{p.place_name}}</label>
                 <br>
-                <label>User's friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}</label>
+                <label>{{selected_user.first_name}}'s friends are: </label>  <label ng-repeat="p in user_friends">{{p.first_name}}</label>
 
-    <p>{{selected_user.first_name}} should try restaurants: </p>
-    <p ng-repeat="r in recommendations">{{ r.place_name }} </p>
-    </div>
-<!--
-<script>
-    var myApp = angular.module('myApp', []);
-    myApp.controller('MyCtrl', function($scope) {
-        $scope.user = "";
-        //$scope.selected_user = ;
-
-        $scope.user_preferences = [{name: 'McDonalds'}, {name: 'Wahaca'}];
-        $scope.user_friends = [{user_id: 1, first_name:'Neja', last_name:'Markocic'}];
-
-        $scope.users=[{user_id: 0, first_name:'Jure', last_name:'Sokolic'},
-                     {user_id: 1, first_name:'Neja', last_name:'Markocic'},
-                     {user_id: 2, first_name:'Zarja', last_name:'Cibej'}];
-        $scope.update_data = function () {
-            $scope.user_preferences = [{name: 'Starbucks'}];
-            $scope.user_friends = [{user_id: 2, first_name:'Zarja', last_name:'Cibej'}];
-
-            }
-        }
-    );
-</script>
--->
-              </div>
+                <p>{{selected_user.first_name}} should try restaurants: </p>
+                <ol>
+                  <li ng-repeat="r in recommendations">{{ r.place_name }}</li>
+                </ol>
+            </div>
+        </div>
       </div>
     </div>
 <br><br>
@@ -63,14 +47,9 @@
 </body>
 </html>
 
-<!-- TODO: we need to handle http request errors!-->
-
-<!--
-Data is:
- list of users
- users preferences/friends
- users recommendations
-
-Action:
- on user change update user preferences/user recommendations
+<!-- TODO:
+    - diplay strings correctly
+    - display data only once user is selected
+    - we need to handle http request errors!
 -->
+
