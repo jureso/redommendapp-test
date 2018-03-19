@@ -3,22 +3,29 @@ myApp.controller('MyCtrl', function($scope, $http) {
     //$scope.user = "";
     $scope.selected_user = "";
 
-    $scope.user_preferences = [{name: 'McDonalds'}, {name: 'Wahaca'}];
-    $scope.user_friends = [{user_id: 1, first_name:'Neja', last_name:'Markocic'}];
+    $scope.user_preferences = [];
+    $scope.user_friends = [];
 
     $scope.update_data = function () {
         //$scope.user_preferences = [{name: 'Starbucks'}];
         //$scope.user_friends = [{user_id: 2, first_name:'Zarja', last_name:'Cibej'}];
         $scope.get_user_friends();
         $scope.get_user_preferences();
+        $scope.get_user_friends_and_preferences();
         };
 
 
     $scope.get_user_list = function () {
-        $http.get('http://127.0.0.1:5000/user_list').then(function(response) {
+        $http.get('/user_list').then(function(response) {
             $scope.user_list = response.data.user_list;
         });
 
+    };
+
+    $scope.get_user_friends_and_preferences = function () {
+        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/friends_and_preferences').then(function(response) {
+            $scope.user_friends_and_preferences = response.data.friends;
+        });
     };
 
     $scope.get_user_friends = function () {

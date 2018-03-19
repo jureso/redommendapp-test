@@ -27,7 +27,7 @@
             </label>
             <tt>User id: {{selected_user.user_id}}</tt>
                 <br>
-                <label>User likes to eat in: </label>  <label ng-repeat="p in user_preferences">{{p.name}}</label>
+                               <label>User has tried restaurants: </label>  <label ng-repeat="p in user_friends_and_preferences.ratings_list">{{p.place_name}}</label>
                 <br>
                 <label>User's friends are: </label>  <label ng-repeat="p in user_preferences">{{p.name}}</label>
 
