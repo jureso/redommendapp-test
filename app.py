@@ -8,30 +8,43 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-from rengine import get_ratings_list, get_friends_list, get_user_list, get_user_recommendations
+from rengine import REngine
+re = REngine()
 
 @app.route("/user_list", methods=["GET"])
 def user_list():
-  data = {}
-  data['user_list'] = get_user_list()
+  """Returns a list of users in our recommender system."""
+  try:
+    data = {}
+    data['user_list'] = re.get_user_list()
+  except Exception as e:
+    print(e)
+    abort(400)
   response = flask.jsonify(data)
   return response
 
 @app.route("/user/<int:user_id>/preferences_and_friends", methods=["GET"])
 def user_preferences_and_friends(user_id):
-  data = {}
-  data['friends_list'] = get_friends_list(user_id)
-  data['ratings_list'] = get_ratings_list(user_id)
+  """For a given user_id return a list of user's friends and places ratings."""
+  try:
+    data = {}
+    data['friends_list'] = re.get_friends_list(user_id)
+    data['ratings_list'] = re.get_ratings_list(user_id)
+  except Exception as e:
+    print(e)
+    abort(400)
   response = flask.jsonify(data)
   return response
 
 @app.route("/user/<int:user_id>/recommendations", methods=["GET"])
 def user_recommendations(user_id):
-  if user_id > 10:
+  """For a give user_id returns a list of places that the user should visit."""
+  try:
+    data = {}
+    data['recommendations'] = re.get_user_recommendations(user_id)
+  except Exception as e:
+    print(e)
     abort(400)
-
-  data = {}
-  data['recommendations'] = get_user_recommendations(user_id)
   response = flask.jsonify(data)
   return response
 
@@ -41,12 +54,3 @@ def index():
 
 if __name__ == '__main__':
   app.run()
-
-  # TODO: refactor database queries and recommendations and api
-  # Create global recommender class that load users and computes recommendations.
-  # Have app call this class functions and in the case of failure send abort messages!
-
-  # TODO: error handling and exceptions for recommendation algorithm
-  # TODO: error handling and exceptions for api
-  # TODO: api tests
-  # TODO: api docs and recommendation algorithm docs
