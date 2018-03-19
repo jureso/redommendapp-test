@@ -31,20 +31,8 @@ myApp.controller('MyCtrl', function($scope, $http) {
         });
     };
 
-    $scope.get_user_friends = function () {
-        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/friends').then(function(response) {
-            $scope.user_friends = response.data.friends;
-        });
-    };
-
-    $scope.get_user_preferences = function () {
-        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/preferences').then(function(response) {
-            $scope.user_preferences = response.data.preferences;
-        });
-    };
-
     $scope.get_user_recommendations = function () {
-        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/recommendations2').then(function(response) {
+        $http.get('/user/'+ $scope.selected_user.user_id.toString() +'/recommendations').then(function(response) {
             $scope.recommendations = response.data.recommendations;
         });
 
