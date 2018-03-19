@@ -13,11 +13,13 @@ create table places(
 );
 create table friends(
     user_id int NOT NULL,
-    friend_user_id int NOT NULL
+    friend_user_id int NOT NULL,
+    PRIMARY KEY(user_id,friend_user_id)
 );
 create table ratings(
     user_id int NOT NULL,
     place_id int NOT NULL,
-    rating int NOT NULL
+    rating int NOT NULL,
+    PRIMARY KEY(user_id,place_id)
 );
 EOF
