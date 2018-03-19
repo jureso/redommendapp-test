@@ -120,8 +120,8 @@ def user_list():
 def user_preferences_and_friends(user_id):
   data = {}
   # TODO: check if the list should be truncated?
-  data['friends_list'] = get_friends_list()
-  data['ratings_list'] = get_ratings_list()
+  data['friends_list'] = get_friends_list(user_id)
+  data['ratings_list'] = get_ratings_list(user_id)
   response = flask.jsonify(data)
   response.headers.add('Access-Control-Allow-Origin', '*')
   return response
