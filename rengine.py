@@ -7,6 +7,7 @@ class REngine(object):
   def __init__(self):
     self.user_list = None
     self.place_list = None
+    self._user_id_list = []
 
   def init(self):
     self.__set_user_list()
