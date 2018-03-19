@@ -7,18 +7,18 @@ class REngine(object):
   def __init__(self):
     self.user_list = None
     self.place_list = None
-    self._user_id_list = []
-    self._place_id2name = []
-
+    self._user_id_list = None
+    self._place_id2name = None
+    self.did_init = False
   def init(self):
     self.__set_user_list()
     self.__set_place_list()
-
+    self.did_init=True
 
   def get_user_list(self):
     """Returns list of users in our database."""
-    if self.user_list is None:
-      self.__set_user_list()
+    if not self.did_init:
+      self.init()
     return self.user_list
 
   def __set_user_list(self):
@@ -30,8 +30,8 @@ class REngine(object):
 
   def get_place_list(self):
     """Returns list of places in our database."""
-    if self.place_list is None:
-      self.__set_place_list()
+    if not self.did_init:
+      self.init()
     return self.place_list
 
   def __set_place_list(self):
@@ -43,6 +43,10 @@ class REngine(object):
 
   def get_friends_list(self, user_id):
     """Returns list of friends of a user."""
+    if not self.did_init:
+      self.init()
+    if self._user_id_list is None:
+      raise RuntimeError("self._user_id_list is None")
     if user_id not in self._user_id_list:
       return []
     else:
@@ -57,6 +61,10 @@ class REngine(object):
 
   def get_ratings_list(self,user_id):
     """Returns place ratings of a user."""
+    if not self.did_init:
+      self.init()
+    if self._user_id_list is None:
+      raise RuntimeError("self._user_id_list is None")
     if user_id not in self._user_id_list:
       return []
     else:
@@ -72,6 +80,12 @@ class REngine(object):
 
   def get_user_recommendations(self, user_id, rating_lower_threshold = 3, n_recommendations = 3):
     """Returns recommended places to visit for a user."""
+    if not self.did_init:
+      self.init()
+    if self._user_id_list is None:
+      raise RuntimeError("self._user_id_list is None")
+    if self._place_id2name is None:
+      raise RuntimeError("self._place_id2name is None")
     if user_id not in self._user_id_list:
       return []
     else:
