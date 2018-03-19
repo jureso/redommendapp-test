@@ -4,8 +4,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 
-
-
 app = Flask(__name__,static_url_path='')
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -121,7 +119,6 @@ def index():
 if __name__ == '__main__':
   app.run()
 
-  # TODO: gui
   # TODO: refactor database queries and recommendations and api
   # TODO: error handling and exceptions for recommendation algorithm
   # TODO: error handling and exceptions for api
