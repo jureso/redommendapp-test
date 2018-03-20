@@ -55,4 +55,5 @@ def index():
 if __name__ == '__main__':
   app.run()
 
-  #TODO: When an account is selected on the UI recommendations of places to go should be listed for that account with probabilities % that the match is appropriate
+#TODO: When an account is selected on the UI recommendations of places to go should be listed for that account with probabilities % that the match is appropriate
+# I think this does not make sense with the current toy data.

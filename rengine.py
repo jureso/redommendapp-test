@@ -89,6 +89,10 @@ class REngine(object):
     if user_id not in self._user_id_list:
       return []
     else:
+      # List of all ratings
+      ratings_list = self.get_ratings_list(user_id)
+      ratings_place_id_list = [r['place_id'] for r in ratings_list]
+
       # List of all friends of the user
       friends_list = self.get_friends_list(user_id)
       friends_id_list = [f['user_id'] for f in friends_list]
@@ -116,9 +120,11 @@ class REngine(object):
         pivot_table_mean.sort_values(ascending=False, inplace=True)
 
         recommendations_list = []
-        # We filter recommendations that are bellow threshold and only provide n_recommendations number of recommendations
+        # We filter recommendations that are bellow threshold,
+        # recommendations that user has already visited and
+        # and only provide n_recommendations number of recommendations
         for p_id, r in pivot_table_mean.items():
-          if r >= rating_lower_threshold:
+          if r >= rating_lower_threshold and not (p_id in ratings_place_id_list):
             recommendations_list.append({'place_id': p_id, 'prediction': int(r),
                                          'place_name': self._place_id2name[p_id]})
           if len(recommendations_list) >= n_recommendations:
