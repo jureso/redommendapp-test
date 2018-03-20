@@ -51,7 +51,7 @@
                     <div ng-show="recommendations.length">
                         <p>{{selected_user.first_name}} should try restaurants: </p>
                         <ol>
-                        <li ng-repeat="r in recommendations">{{ r.place_name }}</li>
+                        <li ng-repeat="r in recommendations">{{ r.place_name }} (Average friend rating is: {{ r.prediction }}/5)</li>
                         </ol>
                     </div>
                     <div ng-show="!recommendations.length">
